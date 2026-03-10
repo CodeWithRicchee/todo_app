@@ -264,7 +264,22 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
                         Row(
                           children: [
                             Expanded(
-                              child: _SocialButton(icon: Icons.g_mobiledata_rounded, label: 'Google'),
+                              child: _SocialButton(
+                                icon: Icons.g_mobiledata_rounded,
+                                label: 'Google',
+                                onTap: _isLoading
+                                    ? null
+                                    : () async {
+                                        setState(() => _isLoading = true);
+                                        try {
+                                          await context.read<AuthProvider>().signInWithGoogle();
+                                        } catch (e) {
+                                          if (mounted) _showErrorSnack(e.toString());
+                                        } finally {
+                                          if (mounted) setState(() => _isLoading = false);
+                                        }
+                                      },
+                              ),
                             ),
                           ],
                         ),
@@ -421,7 +436,8 @@ class _PrimaryButton extends StatelessWidget {
 class _SocialButton extends StatelessWidget {
   final IconData icon;
   final String label;
-  const _SocialButton({required this.icon, required this.label});
+  final VoidCallback? onTap;
+  const _SocialButton({required this.icon, required this.label, this.onTap});
 
   static const _surface = Color(0xFF151820);
   static const _border = Color(0xFF2A2F42);
@@ -432,7 +448,7 @@ class _SocialButton extends StatelessWidget {
     return SizedBox(
       height: 48,
       child: OutlinedButton.icon(
-        onPressed: () {},
+        onPressed: onTap,
         icon: Icon(icon, color: _textPrimary, size: 20),
         label: Text(
           label,

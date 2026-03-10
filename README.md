@@ -7,13 +7,21 @@ A Flutter To‑Do list application with Firebase Authentication and Realtime Dat
 1. **Configure Firebase**
    - Create a Firebase project at https://console.firebase.google.com
    - Enable Email/Password authentication (Authentication → Sign-in method).
+   - Optionally enable **Google** provider on the Authentication → Sign-in method page. 
+     To make the plugin work you also need to:
+     1. Configure the OAuth consent screen (in Google Cloud console).
+     2. Add your app’s SHA‑1 fingerprint under Project settings → General → Your apps → 
+        Android app.
+     3. Download `google-services.json` and place it in `android/app/` (and update 
+        `android/build.gradle`/`app/build.gradle` if you use the standard Firebase plugin).
+     The repository uses the `google_sign_in` package – running `flutter pub get` 
+     after adding it will fetch the dependency.
    - Create a Realtime Database (start in test mode for development).
    - Copy your **Web API Key** and database URL. In `lib/main.dart` replace:
      ```dart
      const firebaseApiKey = 'YOUR_FIREBASE_API_KEY';
      const firebaseDatabaseUrl = 'https://<your-project>.firebaseio.com';
      ```
-   - (Optional) Enable Google sign‑in or other providers and extend the UI.
 
 2. **Install dependencies**
    ```bash
