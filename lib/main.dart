@@ -8,9 +8,8 @@ import 'services/todo_service.dart';
 import 'screens/auth_screen.dart';
 import 'screens/todo_screen.dart';
 
-// TODO: replace with your real Firebase config values.
-const firebaseApiKey = 'YOUR_FIREBASE_API_KEY';
-const firebaseDatabaseUrl = 'https://<your-project>.firebaseio.com';
+const firebaseApiKey = 'AIzaSyCs-qB36SDFQdbDGUW6fFWgx_uylNMK2xs';
+const firebaseDatabaseUrl = 'https://todo-app-69945-default-rtdb.firebaseio.com/';
 
 void main() {
   runApp(const TodoApp());
