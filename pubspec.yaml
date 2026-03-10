@@ -1,4 +1,4 @@
-name: todo_app
+name: todo_task
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -43,6 +43,7 @@ dependencies:
 
   # Google sign in
   google_sign_in: ^6.0.2
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,15 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+# launcher icon configuration (requires flutter_launcher_icons package)
+# NOTE: this section must be top‑level (not nested under flutter).
+# follow the README instructions after editing this section.
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.jpg"
+  remove_alpha_ios: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,4 +1,19 @@
-# Todo App
+# TODO Task
+
+## Changing the launcher icon
+
+This project uses the [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) package for managing app icons.
+1. Place your square icon artwork in `assets/icon.png` (replace the placeholder).
+2. Uncomment and adjust the `flutter_icons` section in `pubspec.yaml`.
+3. Run:
+
+```bash
+flutter pub add flutter_launcher_icons
+flutter pub run flutter_launcher_icons:main
+```
+
+Icons will be generated for Android and iOS automatically.
+
 
 A Flutter To‑Do list application with Firebase Authentication and Realtime Database integration via REST API.
 

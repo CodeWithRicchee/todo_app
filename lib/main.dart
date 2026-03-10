@@ -40,7 +40,7 @@ class _AuthOrTodoApp extends StatelessWidget {
     final auth = context.watch<AuthProvider>();
     if (!auth.isAuthenticated) {
       return MaterialApp(
-        title: 'Todo App',
+        title: 'TODO Task',
         theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue), useMaterial3: true),
         home: const AuthScreen(),
       );
@@ -53,7 +53,8 @@ class _AuthOrTodoApp extends StatelessWidget {
         authToken: auth.token!,
       ),
       child: MaterialApp(
-        title: 'Todo App',
+        title: 'TODO Task',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue), useMaterial3: true),
         home: const TodoScreen(),
       ),

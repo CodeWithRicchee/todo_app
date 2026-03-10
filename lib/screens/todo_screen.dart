@@ -117,8 +117,26 @@ class _TodoScreenState extends State<TodoScreen> with TickerProviderStateMixin {
     }
   }
 
-  void _deleteItem(int index, TodoItem item) {
-    context.read<TodoProvider>().deleteTodo(item.id);
+  Future<void> _deleteItem(int index, TodoItem item) async {
+    // ask user to confirm deletion
+    final confirmed = await showDialog<bool>(
+      context: context,
+      barrierDismissible: true,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Delete task'),
+        content: Text('Are you sure you want to delete "${item.text}"?'),
+        actions: [
+          TextButton(onPressed: () => Navigator.of(ctx).pop(false), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(true),
+            child: const Text('Delete', style: TextStyle(color: _C.danger)),
+          ),
+        ],
+      ),
+    );
+    if (confirmed != true) return;
+
+    await context.read<TodoProvider>().deleteTodo(item.id);
     _listKey.currentState?.removeItem(index, (ctx, anim) => _buildRemovedItem(item, anim), duration: const Duration(milliseconds: 300));
   }
 
@@ -515,6 +533,14 @@ class _TodoCardState extends State<_TodoCard> {
                 icon: const Icon(Icons.edit_outlined, size: 17, color: _C.textMuted),
                 padding: const EdgeInsets.all(12),
                 constraints: const BoxConstraints(),
+              ),
+
+              IconButton(
+                onPressed: widget.onDelete,
+                icon: const Icon(Icons.delete_outline_rounded, size: 17, color: _C.danger),
+                padding: const EdgeInsets.all(12),
+                constraints: const BoxConstraints(),
+                tooltip: 'Delete task',
               ),
               const SizedBox(width: 8),
             ],
